@@ -115,15 +115,26 @@ public class WolfTech_Autonomous_LeftSide extends LinearOpMode {
             leftFrontDrive.setPower(FORWARD_SPEED);
             rightBackDrive.setPower(FORWARD_SPEED);
             leftBackDrive.setPower(FORWARD_SPEED);
-
+            
             runtime.reset();
             while (opModeIsActive() && (runtime.seconds() < 5.0)) {
                 telemetry.addData("Path", "Leg 1: %4.1f S Elapsed", runtime.seconds());
                 telemetry.update();
             }
-            
-        }
 
+            rightFrontDrive.setPower(-FORWARD_SPEED);
+            leftFrontDrive.setPower(-FORWARD_SPEED);
+            rightBackDrive.setPower(-FORWARD_SPEED);
+            leftBackDrive.setPower(-FORWARD_SPEED);
+
+            runtime.reset();
+            while (opModeIsActive() && (runtime.seconds() < 5.0)) {
+                telemetry.addData("Path", "Leg 1: %4.1f S Elapsed", runtime.seconds());
+                telemetry.update();
+            rightFrontDrive.setPower(TURN_SPEED);
+            leftFrontDrive.setPower(TURN_SPEED);
+            rightBackDrive.setPower(TURN_SPEED);
+            leftBackDrive.setPower(TURN_SPEED);
 
         // Step 4:  Stop
         leftFrontDrive.setPower(0);
