@@ -57,10 +57,10 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class WolfTech_Autonomous_RightSide extends LinearOpMode {
 
     /* Declare OpMode members. */
-    public DcMotor         frontleftDrive   = null;
-    public DcMotor         frontrightDrive  = null;
-    public DcMotor         backleftDrive = null;
-    public DcMotor         backrightDrive = null;
+    public DcMotor         frontLeftDrive   = null;
+    public DcMotor         frontRightDrive  = null;
+    public DcMotor         backLeftDrive = null;
+    public DcMotor         backRightDrive = null;
 
     private ElapsedTime     runtime = new ElapsedTime();
 
@@ -72,18 +72,18 @@ public class WolfTech_Autonomous_RightSide extends LinearOpMode {
     public void runOpMode() {
 
         // Initialize the drive system variables.
-        frontleftDrive  = hardwareMap.get(DcMotor.class, "fl");
-        frontrightDrive = hardwareMap.get(DcMotor.class, "fr");
-        backleftDrive = hardwareMap.get(DcMotor.class, "bl");
-        backrightDrive = hardwareMap.get(DcMotor.class, "br");
+        frontLeftDrive  = hardwareMap.get(DcMotor.class, "fl");
+        frontRightDrive = hardwareMap.get(DcMotor.class, "fr");
+        backLeftDrive = hardwareMap.get(DcMotor.class, "bl");
+        backRightDrive = hardwareMap.get(DcMotor.class, "br");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // When run, this OpMode should start both motors driving forward. So adjust these two lines based on your first test drive.
         // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
-        frontleftDrive.setDirection(DcMotor.Direction.REVERSE);
-        frontrightDrive.setDirection(DcMotor.Direction.FORWARD);
-        backleftDrive.setDirection(DcMotor.Direction.REVERSE);
-        backrightDrive.setDirection(DcMotor.Direction.REVERSE);
+        frontLeftDrive.setDirection(DcMotor.Direction.REVERSE);
+        frontRightDrive.setDirection(DcMotor.Direction.FORWARD);
+        backLeftDrive.setDirection(DcMotor.Direction.REVERSE);
+        backRightDrive.setDirection(DcMotor.Direction.REVERSE);
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Ready to run");    //
         telemetry.update();
@@ -94,10 +94,10 @@ public class WolfTech_Autonomous_RightSide extends LinearOpMode {
         // Step through each leg of the path, ensuring that the OpMode has not been stopped along the way.
 
         // Step 1:  Drive forward for 5 seconds
-        frontrightDrive.setPower(FORWARD_SPEED);
-        frontleftDrive.setPower(FORWARD_SPEED);
-        backrightDrive.setPower(FORWARD_SPEED);
-        backleftDrive.setPower(FORWARD_SPEED);
+        frontRightDrive.setPower(FORWARD_SPEED);
+        frontLeftDrive.setPower(FORWARD_SPEED);
+        backRightDrive.setPower(FORWARD_SPEED);
+        backLeftDrive.setPower(FORWARD_SPEED);
 
         runtime.reset();
         while (opModeIsActive() && (runtime.seconds() < 5.0)) {
@@ -106,30 +106,30 @@ public class WolfTech_Autonomous_RightSide extends LinearOpMode {
         }
 
         // Step 2:  Spin right for 1.3 seconds
-        frontleftDrive.setPower(TURN_SPEED);
-        frontrightDrive.setPower(-TURN_SPEED);
-        backrightDrive.setPower(-TURN_SPEED);
-        backleftDrive.setPower(TURN_SPEED);
+        frontLeftDrive.setPower(TURN_SPEED);
+        frontRightDrive.setPower(-TURN_SPEED);
+        backRightDrive.setPower(-TURN_SPEED);
+        backLeftDrive.setPower(TURN_SPEED);
         runtime.reset();
         while (opModeIsActive() && (runtime.seconds() < 1.3)) {
             telemetry.addData("Path", "Leg 2: %4.1f S Elapsed", runtime.seconds());
             telemetry.update();
         }
 
-        frontrightDrive.setPower(FORWARD_SPEED);
-        frontleftDrive.setPower(FORWARD_SPEED);
-        backrightDrive.setPower(FORWARD_SPEED);
-        backleftDrive.setPower(FORWARD_SPEED);
+        frontRightDrive.setPower(FORWARD_SPEED);
+        frontLeftDrive.setPower(FORWARD_SPEED);
+        backRightDrive.setPower(FORWARD_SPEED);
+        backLeftDrive.setPower(FORWARD_SPEED);
         while (opModeIsActive() && (runtime.seconds() < 1.0)) {
             telemetry.addData("Path", "Leg 1: %4.1f S Elapsed", runtime.seconds());
             telemetry.update();
 
         }
 
-        frontleftDrive.setPower(TURN_SPEED);
-        frontrightDrive.setPower(-TURN_SPEED);
-        backrightDrive.setPower(-TURN_SPEED);
-        backleftDrive.setPower(TURN_SPEED);
+        frontLeftDrive.setPower(TURN_SPEED);
+        frontRightDrive.setPower(-TURN_SPEED);
+        backRightDrive.setPower(-TURN_SPEED);
+        backLeftDrive.setPower(TURN_SPEED);
         runtime.reset();
         while (opModeIsActive() && (runtime.seconds() < 1.3)) {
             telemetry.addData("Path", "Leg 2: %4.1f S Elapsed", runtime.seconds());
@@ -137,10 +137,10 @@ public class WolfTech_Autonomous_RightSide extends LinearOpMode {
 
         }
         // Step 3:  Drive Backward for 1 Second
-        frontleftDrive.setPower(FORWARD_SPEED);
-        backleftDrive.setPower(FORWARD_SPEED);
-        frontrightDrive.setPower(FORWARD_SPEED);
-        backrightDrive.setPower(FORWARD_SPEED);
+        frontLeftDrive.setPower(FORWARD_SPEED);
+        backLeftDrive.setPower(FORWARD_SPEED);
+        frontRightDrive.setPower(FORWARD_SPEED);
+        backRightDrive.setPower(FORWARD_SPEED);
         runtime.reset();
         while (opModeIsActive() && (runtime.seconds() < 5.0)) {
             telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
@@ -148,10 +148,10 @@ public class WolfTech_Autonomous_RightSide extends LinearOpMode {
         }
 
         // Step 4:  Stop
-        frontleftDrive.setPower(0);
-        backleftDrive.setPower(0);
-        frontrightDrive.setPower(0);
-        backrightDrive.setPower(0);
+        frontLeftDrive.setPower(0);
+        backLeftDrive.setPower(0);
+        frontRightDrive.setPower(0);
+        backRightDrive.setPower(0);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
