@@ -32,6 +32,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
@@ -90,6 +91,8 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
         leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
         rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
         rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
+        ExtendingMainMotor.setDirection(DcMotor.Direction.FORWARD);
+        RotatingMotor.setDirection(DcMotor.Direction.FORWARD);
 
         // If there are encoders connected, switch to RUN_USING_ENCODER mode for greater accuracy
         // leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -133,6 +136,14 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
             rightBackDrive.setPower(right);
             rightFrontDrive.setPower(right);
 
+            if (gamepad1.y)
+                RotatingMotor.setPower(0.5);
+            else if (gamepad1.a)
+                RotatingMotor.setPower(-0.5);
+            else
+                RotatingMotor.setPower(0.0);
+
+
             // Use gamepad left & right Bumpers to open and close the claw
             if (gamepad1.right_bumper)
                 clawOffset += CLAW_SPEED;
@@ -144,9 +155,9 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
             mainClaw.setPosition(MID_SERVO + clawOffset);
 
             // Use gamepad buttons to move arm up (Y) and down (A)
-            if (gamepad1.y)
+            if (gamepad1.dpad_up)
                 ExtendingMainMotor.setPower(ARM_UP_POWER);
-            else if (gamepad1.a)
+            else if (gamepad1.dpad_down)
                 ExtendingMainMotor.setPower(ARM_DOWN_POWER);
             else
                 ExtendingMainMotor.setPower(0.0);
