@@ -52,17 +52,26 @@ import com.qualcomm.robotcore.util.Range;
 public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
 
     /* Declare OpMode members. */
-    public DcMotor  leftFrontDrive = null;
-    public DcMotor  rightFrontDrive = null;
-    public DcMotor  leftBackDrive = null;
-    public DcMotor  rightBackDrive = null;
-    public DcMotor ExtendingMainMotor = null;
-    public DcMotor RotatingMotor = null;
-    public Servo    mainClaw = null;
+    public DcMotor  leftFrontDrive = null;  // Done
+    public DcMotor  rightFrontDrive = null; // Done
+    public DcMotor  leftBackDrive = null; // Done
+    public DcMotor  rightBackDrive = null; // Done
+    public DcMotor ExtendingMainMotor = null; // Done
+    public DcMotor RotatingMotor = null; // Done
+    public Servo    mainClaw = null; // Done
+    public Servo    shortClaw = null; // Done
+    public Servo    tallClaw = null; // Done
+    public DcMotor shortClawMotor = null; // Done
+    public DcMotor tallClawMotor = null; // Done
+
 
     double clawOffset = 0;
+    double clawOffset2 = 0;
+    double clawOffset3 = 0;
 
     public static final double MID_SERVO   =  0.5 ;
+    public static final double MID_SERVO2 = 0.5;
+    public static final double MID_SERVO3 = 0.5;
     public static final double CLAW_SPEED  = 0.02 ;                 // sets rate to move servo
     public static final double ARM_UP_POWER    =  0.45 ;
     public static final double ARM_DOWN_POWER  = -0.45 ;
@@ -82,7 +91,8 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
         rightBackDrive = hardwareMap.get(DcMotor.class, "lbd");
         ExtendingMainMotor = hardwareMap.get(DcMotor.class, "emm");
         RotatingMotor = hardwareMap.get(DcMotor.class, "rm");
-
+        shortClawMotor = hardwareMap.get(DcMotor.class, "scm");
+        tallClawMotor = hardwareMap.get(DcMotor.class, "tcm");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
@@ -93,6 +103,8 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
         rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
         ExtendingMainMotor.setDirection(DcMotor.Direction.FORWARD);
         RotatingMotor.setDirection(DcMotor.Direction.FORWARD);
+        shortClawMotor.setDirection(DcMotor.Direction.FORWARD);
+        tallClawMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
         // If there are encoders connected, switch to RUN_USING_ENCODER mode for greater accuracy
         // leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -102,6 +114,11 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
         mainClaw = hardwareMap.get(Servo.class, "mc");
         mainClaw.setPosition(MID_SERVO);
 
+        shortClaw = hardwareMap.get(Servo.class, "sc");
+        shortClaw.setPosition(MID_SERVO2);
+
+        tallClaw = hardwareMap.get(Servo.class, "tc");
+        tallClaw.setPosition(MID_SERVO3);
         // Send telemetry message to signify robot waiting;
         telemetry.addData(">", "Robot Ready.  Press START.");    //
         telemetry.update();
@@ -150,9 +167,27 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
             else if (gamepad1.left_bumper)
                 clawOffset -= CLAW_SPEED;
 
+            if (gamepad2.y)
+                clawOffset2 += CLAW_SPEED;
+            else if (gamepad2.a)
+                clawOffset2 -= CLAW_SPEED;
+
+            if (gamepad2.x)
+                clawOffset3 += CLAW_SPEED;
+            else if (gamepad2.b)
+                clawOffset3 += CLAW_SPEED;
+
             // Move both servos to new position.  Assume servos are mirror image of each other.
             clawOffset = Range.clip(clawOffset, -0.5, 0.5);
             mainClaw.setPosition(MID_SERVO + clawOffset);
+
+            clawOffset2 = Range.clip(clawOffset2, -0.5, 0.5);
+            shortClaw.setPosition(MID_SERVO2 + clawOffset2);
+
+            clawOffset3 = Range.clip(clawOffset3, -0.5, 0.5);
+            tallClaw.setPosition(MID_SERVO3 + clawOffset3);
+
+
 
             // Use gamepad buttons to move arm up (Y) and down (A)
             if (gamepad1.dpad_up)
@@ -161,6 +196,20 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
                 ExtendingMainMotor.setPower(ARM_DOWN_POWER);
             else
                 ExtendingMainMotor.setPower(0.0);
+
+            if (gamepad2.right_bumper)
+                shortClawMotor.setPower(0.5);
+            else if (gamepad2.left_bumper)
+                shortClawMotor.setPower(0.5);
+            else
+                shortClawMotor.setPower(0.0);
+
+            if (gamepad2.left_stick_button)
+                tallClawMotor.setPower(0.5);
+            else if (gamepad2.right_stick_button)
+                tallClawMotor.setPower(-0.5);
+            else
+                tallClawMotor.setPower(0.0);
 
             // Send telemetry message to signify robot running;
             telemetry.addData("Left Front", leftFrontDrive.getPower());
