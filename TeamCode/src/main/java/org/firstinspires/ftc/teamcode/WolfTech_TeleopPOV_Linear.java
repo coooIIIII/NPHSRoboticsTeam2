@@ -163,9 +163,7 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
                 ExtendingMainMotor.setPower(0.0);
 
             // Send telemetry message to signify robot running;
-            telemetry.addData("claw",  "Offset = %.2f", clawOffset);
-            telemetry.addData("left",  "%.2f", left);
-            telemetry.addData("right", "%.2f", right);
+            telemetry.addData("Left Front", leftFrontDrive.getPower());
             telemetry.update();
 
             // Pace this loop so jaw action is reasonable speed.
