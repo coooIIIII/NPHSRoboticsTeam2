@@ -55,7 +55,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 
 @Autonomous(name="Robot: Autonomous", group="Robot")
-public class WolfTech_Autonomous_RightSide extends LinearOpMode {
+public class WolfTech_Autonomous_LeftSide extends LinearOpMode {
 
     /* Declare OpMode members. */
     public DcMotor leftFrontDrive = null;  // Done
@@ -130,11 +130,11 @@ public class WolfTech_Autonomous_RightSide extends LinearOpMode {
         }
 
 
-        // Step 2:  Spin left for 1.3 seconds
-        leftBackDrive.setPower(-TURN_SPEED);
-        rightFrontDrive.setPower(TURN_SPEED);
-        rightBackDrive.setPower(TURN_SPEED);
-        leftBackDrive.setPower(-TURN_SPEED);
+        // Step 2:  Spin right for 1.3 seconds
+        leftBackDrive.setPower(TURN_SPEED);
+        rightFrontDrive.setPower(-TURN_SPEED);
+        rightBackDrive.setPower(-TURN_SPEED);
+        leftBackDrive.setPower(TURN_SPEED);
         runtime.reset();
         while (opModeIsActive() && (runtime.seconds() < 1.3)) {
             telemetry.addData("Path", "Leg 2: %4.1f S Elapsed", runtime.seconds());
@@ -194,11 +194,11 @@ public class WolfTech_Autonomous_RightSide extends LinearOpMode {
             telemetry.addData("Path", "Leg 1: %4.1f S Elapsed", runtime.seconds());
             telemetry.update();
         }
-        // Turn Left
-        leftBackDrive.setPower(-TURN_SPEED);
-        rightFrontDrive.setPower(TURN_SPEED);
-        rightBackDrive.setPower(TURN_SPEED);
-        leftBackDrive.setPower(-TURN_SPEED);
+        // Turn Right
+        leftBackDrive.setPower(TURN_SPEED);
+        rightFrontDrive.setPower(-TURN_SPEED);
+        rightBackDrive.setPower(-TURN_SPEED);
+        leftBackDrive.setPower(TURN_SPEED);
         runtime.reset();
         while (opModeIsActive() && (runtime.seconds() < 1.3)) {
             telemetry.addData("Path", "Leg 2: %4.1f S Elapsed", runtime.seconds());
@@ -249,11 +249,11 @@ public class WolfTech_Autonomous_RightSide extends LinearOpMode {
             telemetry.addData("Path", "Leg 1: %4.1f S Elapsed", runtime.seconds());
             telemetry.update();
         }
-        // Turn Left
-        leftBackDrive.setPower(-TURN_SPEED);
-        rightFrontDrive.setPower(TURN_SPEED);
-        rightBackDrive.setPower(TURN_SPEED);
-        leftBackDrive.setPower(-TURN_SPEED);
+        // Turn Right
+        leftBackDrive.setPower(TURN_SPEED);
+        rightFrontDrive.setPower(-TURN_SPEED);
+        rightBackDrive.setPower(-TURN_SPEED);
+        leftBackDrive.setPower(TURN_SPEED);
         runtime.reset();
         while (opModeIsActive() && (runtime.seconds() < 1.3)) {
             telemetry.addData("Path", "Leg 2: %4.1f S Elapsed", runtime.seconds());
