@@ -153,6 +153,15 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
             rightBackDrive.setPower(right);
             rightFrontDrive.setPower(right);
 
+
+            if (gamepad1.y)
+                RotatingMotor.setPower(0.5);
+            else if (gamepad1.a)
+                RotatingMotor.setPower(-0.5);
+            else
+                RotatingMotor.setPower(0.0);
+
+
             if (gamepad1.y)
                 RotatingMotor.setPower(0.5);
             else if (gamepad1.a)
@@ -197,6 +206,18 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
             else
                 ExtendingMainMotor.setPower(0.0);
 
+            if (gamepad1.dpad_right) {
+                leftFrontDrive.setPower(1);
+                rightFrontDrive.setPower(-1);
+                leftBackDrive.setPower(-1);
+                rightBackDrive.setPower(1);
+            }
+            else if (gamepad1.dpad_left) {
+                leftFrontDrive.setPower(-1);
+                rightFrontDrive.setPower(1);
+                leftBackDrive.setPower(1);
+                rightBackDrive.setPower(-1);
+            }
             if (gamepad2.right_bumper)
                 shortClawMotor.setPower(0.5);
             else if (gamepad2.left_bumper)
