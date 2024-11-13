@@ -123,6 +123,7 @@ public class WolfTech_Autonomous_LeftSide extends LinearOpMode {
         }
         // Raise Arm and Release Claw
         ExtendingMainMotor.setPower(ARM_UP_POWER);
+        RotatingMotor.setPower(-0.5);
         mainClaw.setPosition(MID_SERVO - CLAW_SPEED);
         while (opModeIsActive() && (runtime.seconds() < 5.0)) {
             telemetry.addData("Path", "Leg 1: %4.1f S Elapsed", runtime.seconds());
@@ -189,6 +190,7 @@ public class WolfTech_Autonomous_LeftSide extends LinearOpMode {
         }
         // Raise Arm and Release Claw
         ExtendingMainMotor.setPower(ARM_UP_POWER);
+        RotatingMotor.setPower(-0.5);
         mainClaw.setPosition(MID_SERVO - CLAW_SPEED);
         while (opModeIsActive() && (runtime.seconds() < 5.0)) {
             telemetry.addData("Path", "Leg 1: %4.1f S Elapsed", runtime.seconds());
@@ -244,6 +246,7 @@ public class WolfTech_Autonomous_LeftSide extends LinearOpMode {
         }
         // Raise Arm and Release Claw
         ExtendingMainMotor.setPower(ARM_UP_POWER);
+        RotatingMotor.setPower(-0.5);
         mainClaw.setPosition(MID_SERVO - CLAW_SPEED);
         while (opModeIsActive() && (runtime.seconds() < 5.0)) {
             telemetry.addData("Path", "Leg 1: %4.1f S Elapsed", runtime.seconds());
@@ -297,6 +300,7 @@ public class WolfTech_Autonomous_LeftSide extends LinearOpMode {
         }
         // Raise Arm and Release Claw
         ExtendingMainMotor.setPower(ARM_UP_POWER);
+        RotatingMotor.setPower(-0.5);
         mainClaw.setPosition(MID_SERVO - CLAW_SPEED);
         while (opModeIsActive() && (runtime.seconds() < 5.0)) {
             telemetry.addData("Path", "Leg 1: %4.1f S Elapsed", runtime.seconds());
