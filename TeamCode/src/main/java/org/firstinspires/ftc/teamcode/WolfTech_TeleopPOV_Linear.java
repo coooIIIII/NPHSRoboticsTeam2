@@ -153,12 +153,30 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
             rightBackDrive.setPower(right);
             rightFrontDrive.setPower(right);
 
+<<<<<<< HEAD
 //            if (gamepad1.y)
 //                RotatingMotor.setPower(0.5);
 //            else if (gamepad1.a)
 //                RotatingMotor.setPower(-0.5);
 //            else
 //                RotatingMotor.setPower(0.0);
+=======
+
+            if (gamepad1.y)
+                RotatingMotor.setPower(0.5);
+            else if (gamepad1.a)
+                RotatingMotor.setPower(-0.5);
+            else
+                RotatingMotor.setPower(0.0);
+
+
+            if (gamepad1.y)
+                RotatingMotor.setPower(0.5);
+            else if (gamepad1.a)
+                RotatingMotor.setPower(-0.5);
+            else
+                RotatingMotor.setPower(0.0);
+>>>>>>> ea4f32c580d565beaef4e60f66458444fba0dd9d
 
 
 //            // Use gamepad left & right Bumpers to open and close the claw
@@ -197,6 +215,7 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
             else
                 ExtendingMainMotor.setPower(0.0);
 
+<<<<<<< HEAD
 //            if (gamepad2.right_bumper)
 //                shortClawMotor.setPower(0.5);
 //            else if (gamepad2.left_bumper)
@@ -210,6 +229,33 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
 //                tallClawMotor.setPower(-0.5);
 //            else
 //                tallClawMotor.setPower(0.0);
+=======
+            if (gamepad1.dpad_right) {
+                leftFrontDrive.setPower(1);
+                rightFrontDrive.setPower(-1);
+                leftBackDrive.setPower(-1);
+                rightBackDrive.setPower(1);
+            }
+            else if (gamepad1.dpad_left) {
+                leftFrontDrive.setPower(-1);
+                rightFrontDrive.setPower(1);
+                leftBackDrive.setPower(1);
+                rightBackDrive.setPower(-1);
+            }
+            if (gamepad2.right_bumper)
+                shortClawMotor.setPower(0.5);
+            else if (gamepad2.left_bumper)
+                shortClawMotor.setPower(0.5);
+            else
+                shortClawMotor.setPower(0.0);
+
+            if (gamepad2.left_stick_button)
+                tallClawMotor.setPower(0.5);
+            else if (gamepad2.right_stick_button)
+                tallClawMotor.setPower(-0.5);
+            else
+                tallClawMotor.setPower(0.0);
+>>>>>>> ea4f32c580d565beaef4e60f66458444fba0dd9d
 
             // Send telemetry message to signify robot running;
             telemetry.addData("Left Front", leftFrontDrive.getPower());
