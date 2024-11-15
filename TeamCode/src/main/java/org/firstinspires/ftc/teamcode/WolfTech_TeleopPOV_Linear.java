@@ -60,6 +60,7 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
     public DcMotor ExtendingMainMotor = null; // Done
     public DcMotor RotatingMotor = null; // Done
     public Servo    mainClaw = null; // Done
+    public DcMotor CounterWeightMotor = null;
 //    public Servo    shortClaw = null; // Done
 //    public Servo    tallClaw = null; // Done
 //    public DcMotor shortClawMotor = null; // Done
@@ -94,6 +95,7 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
         rightBackDrive = hardwareMap.get(DcMotor.class, "rbd");
         ExtendingMainMotor = hardwareMap.get(DcMotor.class, "emm");
         RotatingMotor = hardwareMap.get(DcMotor.class, "rm");
+        CounterWeightMotor = hardwareMap.get(DcMotor.class, "cwm");
 //        shortClawMotor = hardwareMap.get(DcMotor.class, "scm");
 //        tallClawMotor = hardwareMap.get(DcMotor.class, "tcm");
 
@@ -109,6 +111,7 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
 //        shortClawMotor.setDirection(DcMotor.Direction.FORWARD);
 //        tallClawMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         RaisingMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        CounterWeightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
         // Define and initialize ALL installed servos.
         mainClaw = hardwareMap.get(Servo.class, "mc");
@@ -224,12 +227,18 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
             else
                 ExtendingMainMotor.setPower(0.0);
 
-            if (gamepad1.dpad_up)
+            if (gamepad1.dpad_up) {
                 RaisingMotor.setPower(RAISE);
-            else if (gamepad1.dpad_down)
+                CounterWeightMotor.setPower(RAISE);
+            }
+            else if (gamepad1.dpad_down) {
                 ExtendingMainMotor.setPower(LOWER);
-            else
+                CounterWeightMotor.setPower(LOWER);
+            }
+            else {
                 ExtendingMainMotor.setPower(0.0);
+                CounterWeightMotor.setPower(0.0);
+            }
 
 
 //            if (gamepad2.right_bumper)
