@@ -225,9 +225,9 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
 //            else
 //                ExtendingMainMotor.setPower(0.0);
 
-            if (gamepad1.dpad_up)
+            if (gamepad2.dpad_up)
                 RaisingMotor.setPower(RAISE);
-            else if (gamepad1.dpad_down)
+            else if (gamepad2.dpad_down)
                 RaisingMotor.setPower(LOWER);
             else
                 RaisingMotor.setPower(0.0);
@@ -240,7 +240,7 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
 //            else
 //                shortClawMotor.setPower(0.0);
 //
---//            if (gamepad2.left_stick_button)
+//            if (gamepad2.left_stick_button)
 //                tallClawMotor.setPower(0.5);
 //            else if (gamepad2.right_stick_button)
 //                tallClawMotor.setPower(-0.5);
@@ -249,16 +249,16 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
 
 
             // Send telemetry message to signify robot running;
-            telemetry.addData("Left Front", leftFrontDrive.getPower());
-            telemetry.addData("Left Back", leftBackDrive.getPower());
-            telemetry.addData("Right Front", rightFrontDrive.getPower());
-            telemetry.addData("Right Back", rightBackDrive.getPower());
-
-
-            telemetry.update();
+//            telemetry.addData("Left Front", leftFrontDrive.getPower());
+//            telemetry.addData("Left Back", leftBackDrive.getPower());
+//            telemetry.addData("Right Front", rightFrontDrive.getPower());
+//            telemetry.addData("Right Back", rightBackDrive.getPower());
+//
+//
+//            telemetry.update();
 
             // Pace this loop so jaw action is reasonable speed.
-            sleep(50);
+//            sleep(50);
         }
     }
 }
