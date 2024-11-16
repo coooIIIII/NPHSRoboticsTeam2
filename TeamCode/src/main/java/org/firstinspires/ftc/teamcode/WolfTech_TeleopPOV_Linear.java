@@ -56,7 +56,7 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
     public DcMotor  rightFrontDrive = null; // Done
     public DcMotor  leftBackDrive = null; // Done
     public DcMotor  rightBackDrive = null; // Done
-//    public DcMotor RaisingMotor = null;
+    public DcMotor RaisingMotor = null;
 //    public DcMotor ExtendingMainMotor = null; // Done
 //    public DcMotor RotatingMotor = null; // Done
 //    public Servo    mainClaw = null; // Done
@@ -96,6 +96,7 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
 //        RotatingMotor = hardwareMap.get(DcMotor.class, "rm");
 //        shortClawMotor = hardwareMap.get(DcMotor.class, "scm");
 //        tallClawMotor = hardwareMap.get(DcMotor.class, "tcm");
+        RaisingMotor = hardwareMap.get(DcMotor.class, "rmm");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
@@ -108,7 +109,7 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
 //        RotatingMotor.setDirection(DcMotor.Direction.FORWARD);
 //        shortClawMotor.setDirection(DcMotor.Direction.FORWARD);
 //        tallClawMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-//        RaisingMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        RaisingMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
         // Define and initialize ALL installed servos.
 //        mainClaw = hardwareMap.get(Servo.class, "mc");
@@ -224,12 +225,12 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
 //            else
 //                ExtendingMainMotor.setPower(0.0);
 
-//            if (gamepad1.dpad_up)
-//                RaisingMotor.setPower(RAISE);
-//            else if (gamepad1.dpad_down)
-//                RaisingMotor.setPower(LOWER);
-//            else
-//                RaisingMotor.setPower(0.0);
+            if (gamepad1.dpad_up)
+                RaisingMotor.setPower(RAISE);
+            else if (gamepad1.dpad_down)
+                RaisingMotor.setPower(LOWER);
+            else
+                RaisingMotor.setPower(0.0);
 
 
 //            if (gamepad2.right_bumper)
