@@ -56,10 +56,10 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
     public DcMotor  rightFrontDrive = null; // Done
     public DcMotor  leftBackDrive = null; // Done
     public DcMotor  rightBackDrive = null; // Done
-    public DcMotor RaisingMotor = null;
-    public DcMotor ExtendingMainMotor = null; // Done
-    public DcMotor RotatingMotor = null; // Done
-    public Servo    mainClaw = null; // Done
+//    public DcMotor RaisingMotor = null;
+//    public DcMotor ExtendingMainMotor = null; // Done
+//    public DcMotor RotatingMotor = null; // Done
+//    public Servo    mainClaw = null; // Done
 //    public Servo    shortClaw = null; // Done
 //    public Servo    tallClaw = null; // Done
 //    public DcMotor shortClawMotor = null; // Done
@@ -92,8 +92,8 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
         rightFrontDrive = hardwareMap.get(DcMotor.class, "rfd");
         leftBackDrive = hardwareMap.get(DcMotor.class, "lbd");
         rightBackDrive = hardwareMap.get(DcMotor.class, "rbd");
-        ExtendingMainMotor = hardwareMap.get(DcMotor.class, "emm");
-        RotatingMotor = hardwareMap.get(DcMotor.class, "rm");
+//        ExtendingMainMotor = hardwareMap.get(DcMotor.class, "emm");
+//        RotatingMotor = hardwareMap.get(DcMotor.class, "rm");
 //        shortClawMotor = hardwareMap.get(DcMotor.class, "scm");
 //        tallClawMotor = hardwareMap.get(DcMotor.class, "tcm");
 
@@ -104,15 +104,15 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
         leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
         rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
         rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
-        ExtendingMainMotor.setDirection(DcMotor.Direction.FORWARD);
-        RotatingMotor.setDirection(DcMotor.Direction.FORWARD);
+//        ExtendingMainMotor.setDirection(DcMotor.Direction.FORWARD);
+//        RotatingMotor.setDirection(DcMotor.Direction.FORWARD);
 //        shortClawMotor.setDirection(DcMotor.Direction.FORWARD);
 //        tallClawMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        RaisingMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+//        RaisingMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
         // Define and initialize ALL installed servos.
-        mainClaw = hardwareMap.get(Servo.class, "mc");
-        mainClaw.setPosition(MID_SERVO);
+//        mainClaw = hardwareMap.get(Servo.class, "mc");
+//        mainClaw.setPosition(MID_SERVO);
 
 //        shortClaw = hardwareMap.get(Servo.class, "sc");
 //        shortClaw.setPosition(MID_SERVO2);
@@ -172,20 +172,20 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
             }
 
 
-            if (gamepad1.y)
-                RotatingMotor.setPower(0.5);
-            else if (gamepad1.a)
-                RotatingMotor.setPower(-0.5);
-            else
-                RotatingMotor.setPower(0.0);
+//            if (gamepad1.y)
+//                RotatingMotor.setPower(0.5);
+//            else if (gamepad1.a)
+//                RotatingMotor.setPower(-0.5);
+//            else
+//                RotatingMotor.setPower(0.0);
 
 
-            if (gamepad1.y)
-                RotatingMotor.setPower(0.5);
-            else if (gamepad1.a)
-                RotatingMotor.setPower(-0.5);
-            else
-                RotatingMotor.setPower(0.0);
+//            if (gamepad1.y)
+//                RotatingMotor.setPower(0.5);
+//            else if (gamepad1.a)
+//                RotatingMotor.setPower(-0.5);
+//            else
+//                RotatingMotor.setPower(0.0);
 
 
 
@@ -206,8 +206,8 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
 //                clawOffset3 += CLAW_SPEED;
 
             // Move both servos to new position.  Assume servos are mirror image of each other.
-            clawOffset = Range.clip(clawOffset, -0.5, 0.5);
-            mainClaw.setPosition(MID_SERVO + clawOffset);
+//            clawOffset = Range.clip(clawOffset, -0.5, 0.5);
+//            mainClaw.setPosition(MID_SERVO + clawOffset);
 
 //            clawOffset2 = Range.clip(clawOffset2, -0.5, 0.5);
 //            shortClaw.setPosition(MID_SERVO2 + clawOffset2);
@@ -217,19 +217,19 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
 
 
             // Use gamepad buttons to move arm up (Y) and down (A)
-            if (gamepad2.dpad_up)
-                ExtendingMainMotor.setPower(ARM_UP_POWER);
-            else if (gamepad2.dpad_down)
-                ExtendingMainMotor.setPower(ARM_DOWN_POWER);
-            else
-                ExtendingMainMotor.setPower(0.0);
+//            if (gamepad2.dpad_up)
+//                ExtendingMainMotor.setPower(ARM_UP_POWER);
+//            else if (gamepad2.dpad_down)
+//                ExtendingMainMotor.setPower(ARM_DOWN_POWER);
+//            else
+//                ExtendingMainMotor.setPower(0.0);
 
-            if (gamepad1.dpad_up)
-                RaisingMotor.setPower(RAISE);
-            else if (gamepad1.dpad_down)
-                ExtendingMainMotor.setPower(LOWER);
-            else
-                ExtendingMainMotor.setPower(0.0);
+//            if (gamepad1.dpad_up)
+//                RaisingMotor.setPower(RAISE);
+//            else if (gamepad1.dpad_down)
+//                RaisingMotor.setPower(LOWER);
+//            else
+//                RaisingMotor.setPower(0.0);
 
 
 //            if (gamepad2.right_bumper)
