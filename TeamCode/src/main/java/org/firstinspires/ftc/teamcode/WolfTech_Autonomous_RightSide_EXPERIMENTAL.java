@@ -94,9 +94,9 @@ public class WolfTech_Autonomous_RightSide_EXPERIMENTAL extends LinearOpMode {
     public DcMotor rightFrontDrive = null; // Done
     public DcMotor leftBackDrive = null; // Done
     public DcMotor rightBackDrive = null; // Done
-    public DcMotor ExtendingMainMotor = null; // Done
-    public DcMotor RotatingMotor = null; // Done
-    public Servo mainClaw = null; // Done
+//    public DcMotor ExtendingMainMotor = null; // Done
+//    public DcMotor RotatingMotor = null; // Done
+//    public Servo mainClaw = null; // Done
 
     public static final double MID_SERVO = 0.5;
     public static final double CLAW_SPEED = 0.02;
@@ -153,8 +153,8 @@ public class WolfTech_Autonomous_RightSide_EXPERIMENTAL extends LinearOpMode {
         rightFrontDrive = hardwareMap.get(DcMotor.class, "rfd");
         leftBackDrive = hardwareMap.get(DcMotor.class, "lbd");
         rightBackDrive = hardwareMap.get(DcMotor.class, "rbd");
-        ExtendingMainMotor = hardwareMap.get(DcMotor.class, "emm");
-        RotatingMotor = hardwareMap.get(DcMotor.class, "rm");
+//        ExtendingMainMotor = hardwareMap.get(DcMotor.class, "emm");
+//        RotatingMotor = hardwareMap.get(DcMotor.class, "rm");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // When run, this OpMode should start both motors driving forward. So adjust these two lines based on your first test drive.
@@ -165,8 +165,8 @@ public class WolfTech_Autonomous_RightSide_EXPERIMENTAL extends LinearOpMode {
         leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
         rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
 
-        mainClaw = hardwareMap.get(Servo.class, "mc");
-        mainClaw.setPosition(MID_SERVO);
+//        mainClaw = hardwareMap.get(Servo.class, "mc");
+//        mainClaw.setPosition(MID_SERVO);
 
         /* The next two lines define Hub orientation.
          * The Default Orientation (shown) is when a hub is mounted horizontally with the printed logo pointing UP and the USB port pointing FORWARD.
@@ -212,9 +212,9 @@ public class WolfTech_Autonomous_RightSide_EXPERIMENTAL extends LinearOpMode {
         //          Add a sleep(2000) after any step to keep the telemetry data visible for review
 
         driveStraight(DRIVE_SPEED, 24.0, 0.0); // Drive Forward 24"
-        ExtendingMainMotor.setPower(ARM_UP_POWER);
-        RotatingMotor.setPower(-0.5);
-        mainClaw.setPosition(MID_SERVO - CLAW_SPEED);
+//        ExtendingMainMotor.setPower(ARM_UP_POWER);
+//        RotatingMotor.setPower(-0.5);
+//        mainClaw.setPosition(MID_SERVO - CLAW_SPEED);
         while (opModeIsActive() && (runtime.seconds() < 5.0)) {
             telemetry.addData("Path", "Leg 1: %4.1f S Elapsed", runtime.seconds());
             telemetry.update();
@@ -222,10 +222,10 @@ public class WolfTech_Autonomous_RightSide_EXPERIMENTAL extends LinearOpMode {
         turnToHeading( TURN_SPEED, -90.0);               // Turn  CW to -45 Degrees
         holdHeading( TURN_SPEED, -90.0, 0.5);   // Hold -45 Deg heading for a 1/2 second
 
-        driveStraight(DRIVE_SPEED, 17.0, -90.0);  // Drive Forward 17" at -45 degrees (12"x and 12"y)
-        ExtendingMainMotor.setPower(ARM_DOWN_POWER);
-        RotatingMotor.setPower(0.5);
-        mainClaw.setPosition(MID_SERVO + CLAW_SPEED);
+//        driveStraight(DRIVE_SPEED, 17.0, -90.0);  // Drive Forward 17" at -45 degrees (12"x and 12"y)
+//        ExtendingMainMotor.setPower(ARM_DOWN_POWER);
+//        RotatingMotor.setPower(0.5);
+//        mainClaw.setPosition(MID_SERVO + CLAW_SPEED);
         runtime.reset();
         while (opModeIsActive() && (runtime.seconds() < 1.3)) {
             telemetry.addData("Path", "Leg 2: %4.1f S Elapsed", runtime.seconds());
@@ -237,9 +237,9 @@ public class WolfTech_Autonomous_RightSide_EXPERIMENTAL extends LinearOpMode {
         holdHeading( TURN_SPEED,   180.0, 1.0);    // Hold  0 Deg heading for 1 second
 
         driveStraight(DRIVE_SPEED,48.0, 180.0);    // Drive in Reverse 48" (should return to approx. staring position)
-        ExtendingMainMotor.setPower(ARM_UP_POWER);
-        RotatingMotor.setPower(-0.5);
-        mainClaw.setPosition(MID_SERVO - CLAW_SPEED);
+//        ExtendingMainMotor.setPower(ARM_UP_POWER);
+//        RotatingMotor.setPower(-0.5);
+//        mainClaw.setPosition(MID_SERVO - CLAW_SPEED);
         runtime.reset();
         while (opModeIsActive() && (runtime.seconds() < 5.0)) {
             telemetry.addData("Path", "Leg 1: %4.1f S Elapsed", runtime.seconds());
@@ -248,9 +248,9 @@ public class WolfTech_Autonomous_RightSide_EXPERIMENTAL extends LinearOpMode {
         turnToHeading( TURN_SPEED, -90.0);               // Turn  CW to -45 Degrees
         holdHeading( TURN_SPEED, -90.0, 0.5);
         driveStraight(DRIVE_SPEED, 17.0, -90.0);
-        ExtendingMainMotor.setPower(ARM_DOWN_POWER);
-        RotatingMotor.setPower(0.5);
-        mainClaw.setPosition(MID_SERVO + CLAW_SPEED);
+//        ExtendingMainMotor.setPower(ARM_DOWN_POWER);
+//        RotatingMotor.setPower(0.5);
+//        mainClaw.setPosition(MID_SERVO + CLAW_SPEED);
         runtime.reset();
         while (opModeIsActive() && (runtime.seconds() < 1.3)) {
             telemetry.addData("Path", "Leg 2: %4.1f S Elapsed", runtime.seconds());
@@ -260,9 +260,9 @@ public class WolfTech_Autonomous_RightSide_EXPERIMENTAL extends LinearOpMode {
         turnToHeading( TURN_SPEED,   180.0);               // Turn  CW  to 0 Degrees
         holdHeading( TURN_SPEED,   180.0, 1.0);
         driveStraight(DRIVE_SPEED,48.0, 180.0);
-        ExtendingMainMotor.setPower(ARM_UP_POWER);
-        RotatingMotor.setPower(-0.5);
-        mainClaw.setPosition(MID_SERVO - CLAW_SPEED);
+//        ExtendingMainMotor.setPower(ARM_UP_POWER);
+//        RotatingMotor.setPower(-0.5);
+//        mainClaw.setPosition(MID_SERVO - CLAW_SPEED);
         runtime.reset();
         while (opModeIsActive() && (runtime.seconds() < 5.0)) {
             telemetry.addData("Path", "Leg 1: %4.1f S Elapsed", runtime.seconds());
@@ -271,9 +271,9 @@ public class WolfTech_Autonomous_RightSide_EXPERIMENTAL extends LinearOpMode {
         turnToHeading( TURN_SPEED, -90.0);               // Turn  CW to -45 Degrees
         holdHeading( TURN_SPEED, -90.0, 0.5);
         driveStraight(DRIVE_SPEED, 17.0, -90.0);
-        ExtendingMainMotor.setPower(ARM_DOWN_POWER);
-        RotatingMotor.setPower(0.5);
-        mainClaw.setPosition(MID_SERVO + CLAW_SPEED);
+//        ExtendingMainMotor.setPower(ARM_DOWN_POWER);
+//        RotatingMotor.setPower(0.5);
+//        mainClaw.setPosition(MID_SERVO + CLAW_SPEED);
         runtime.reset();
         while (opModeIsActive() && (runtime.seconds() < 1.3)) {
             telemetry.addData("Path", "Leg 2: %4.1f S Elapsed", runtime.seconds());
@@ -283,9 +283,9 @@ public class WolfTech_Autonomous_RightSide_EXPERIMENTAL extends LinearOpMode {
         turnToHeading( TURN_SPEED,   180.0);               // Turn  CW  to 0 Degrees
         holdHeading( TURN_SPEED,   180.0, 1.0);
         driveStraight(DRIVE_SPEED,48.0, 180.0);
-        ExtendingMainMotor.setPower(ARM_UP_POWER);
-        RotatingMotor.setPower(-0.5);
-        mainClaw.setPosition(MID_SERVO - CLAW_SPEED);
+//        ExtendingMainMotor.setPower(ARM_UP_POWER);
+//        RotatingMotor.setPower(-0.5);
+//        mainClaw.setPosition(MID_SERVO - CLAW_SPEED);
         runtime.reset();
         while (opModeIsActive() && (runtime.seconds() < 5.0)) {
             telemetry.addData("Path", "Leg 1: %4.1f S Elapsed", runtime.seconds());

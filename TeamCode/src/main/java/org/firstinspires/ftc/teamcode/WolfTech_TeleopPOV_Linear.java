@@ -141,11 +141,11 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
             right = drive - turn;
 
             // Normalize the values so neither exceed +/- 1.0
-            if (left > 2)
-                left = 2;
+            if (left > 0.5)
+                left = 0.5;
 
-            if (right > 2)
-                right = 2;
+            if (right > 0.5)
+                right = 0.5;
 
             // Output the safe vales to the motor drives.
             leftFrontDrive.setPower(left);
@@ -154,16 +154,16 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
             rightFrontDrive.setPower(right);
 
             if (gamepad1.dpad_right) {
-                leftFrontDrive.setPower(2);
-                rightFrontDrive.setPower(-2);
-                leftBackDrive.setPower(-2);
-                rightBackDrive.setPower(2);
+                leftFrontDrive.setPower(0.5);
+                rightFrontDrive.setPower(-0.5);
+                leftBackDrive.setPower(-0.5);
+                rightBackDrive.setPower(0.5);
             }
             else if (gamepad1.dpad_left) {
-                leftFrontDrive.setPower(-2);
-                rightFrontDrive.setPower(2);
-                leftBackDrive.setPower(2);
-                rightBackDrive.setPower(-2);
+                leftFrontDrive.setPower(-0.5);
+                rightFrontDrive.setPower(0.5);
+                leftBackDrive.setPower(0.5);
+                rightBackDrive.setPower(-0.5);
             }
             else {
                 leftFrontDrive.setPower(0);
@@ -240,7 +240,7 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
 //            else
 //                shortClawMotor.setPower(0.0);
 //
-//            if (gamepad2.left_stick_button)
+--//            if (gamepad2.left_stick_button)
 //                tallClawMotor.setPower(0.5);
 //            else if (gamepad2.right_stick_button)
 //                tallClawMotor.setPower(-0.5);
