@@ -140,11 +140,11 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
             right = drive - turn;
 
             // Normalize the values so neither exceed +/- 1.0
-            if (left > 0.5)
-                left = 0.5;
+            if (left > 2)
+                left = 2;
 
-            if (right > 0.5)
-                right = 0.5;
+            if (right > 2)
+                right = 2;
 
             // Output the safe vales to the motor drives.
             leftFrontDrive.setPower(left);
