@@ -229,6 +229,7 @@ public class TechWolves_Autonomous_LeftSide extends LinearOpMode {
         //          holdHeading() is used after turns to let the heading stabilize
         //          Add a sleep(2000) after any step to keep the telemetry data visible for review
         driveStraight(DRIVE_SPEED, 5.0, 0.0);
+        holdHeading(DRIVE_SPEED, 0.0, 3.0);
         raiseArm();
         turn90();
         lowerArm();
