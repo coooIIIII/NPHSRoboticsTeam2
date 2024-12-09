@@ -1,4 +1,4 @@
-/* Copyright (c) 2022 FIRST. All rights reserved.
+package org.firstinspires.ftc.teamcode;/* Copyright (c) 2022 FIRST. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted (subject to the limitations in the disclaimer below) provided that
@@ -488,8 +488,10 @@ public class WolfTech_Autonomous_RightSide_EXPERIMENTAL extends LinearOpMode {
             rightSpeed /= max;
         }
 
-        leftDrive.setPower(leftSpeed);
-        rightDrive.setPower(rightSpeed);
+        leftFrontDrive.setPower(leftSpeed);
+        leftBackDrive.setPower(leftSpeed);
+        rightFrontDrive.setPower(rightSpeed);
+        rightBackDrive.setPower(rightSpeed);
     }
 
     /**
@@ -502,8 +504,8 @@ public class WolfTech_Autonomous_RightSide_EXPERIMENTAL extends LinearOpMode {
         if (straight) {
             telemetry.addData("Motion", "Drive Straight");
             telemetry.addData("Target Pos L:R",  "%7d:%7d", LeftFronttarget, RightFronttarget);
-            telemetry.addData("Actual Pos L:R",  "%7d:%7d",      leftDrive.getCurrentPosition(),
-                    rightDrive.getCurrentPosition());
+            telemetry.addData("Actual Pos L:R",  "%7d:%7d",      leftFrontDrive.getCurrentPosition(),
+                    rightFrontDrive.getCurrentPosition());
         } else {
             telemetry.addData("Motion", "Turning");
         }
