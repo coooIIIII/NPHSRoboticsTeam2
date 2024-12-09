@@ -121,8 +121,8 @@ public class TechWolves_Autonomous_LeftSide extends LinearOpMode {
     private int LeftBacktarget = 0;
     private int RightBacktarget = 0;
     private ElapsedTime runtime = new ElapsedTime();
-    private int armUpPosition = -1000;
-    private int armDownPosition = 1000;
+    private int armUpPosition = -1500;
+    private int armDownPosition = 1500;
 
     // Calculate the COUNTS_PER_INCH for your specific drive train.
     // Go to your motor vendor website to determine your motor's COUNTS_PER_MOTOR_REV
@@ -138,7 +138,7 @@ public class TechWolves_Autonomous_LeftSide extends LinearOpMode {
 
     // These constants define the desired driving/control characteristics
     // They can/should be tweaked to suit the specific robot drive train.
-    static final double     DRIVE_SPEED             = 0.6;     // Max driving speed for better distance accuracy.
+    static final double     DRIVE_SPEED             = 1;     // Max driving speed for better distance accuracy.
     static final double     TURN_SPEED              = 0.5;     // Max turn speed to limit turn rate.
     static final double     HEADING_THRESHOLD       = 1.0 ;    // How close must the heading get to the target before moving to next step.
     // Requiring more accuracy (a smaller number) will often make the turn take longer to get into the final position.
@@ -149,11 +149,11 @@ public class TechWolves_Autonomous_LeftSide extends LinearOpMode {
     static final double     P_TURN_GAIN            = 0.02;     // Larger is more responsive, but also less stable.
     static final double     P_DRIVE_GAIN           = 0.03;  // Larger is more responsive, but also less stable.
 
-    int position = ExtendingMainMotor.getCurrentPosition();
-    double revolutions = position/COUNTS_PER_MOTOR_REV;
-
-    double angle = revolutions * 360;
-    double angleNormalized = angle % 360;
+//    int position = ExtendingMainMotor.getCurrentPosition();
+//    double revolutions = position/COUNTS_PER_MOTOR_REV;
+//
+//    double angle = revolutions * 360;
+//    double angleNormalized = angle % 360;
 
 
     @Override
@@ -229,9 +229,13 @@ public class TechWolves_Autonomous_LeftSide extends LinearOpMode {
         //          holdHeading() is used after turns to let the heading stabilize
         //          Add a sleep(2000) after any step to keep the telemetry data visible for review
         driveStraight(DRIVE_SPEED, 5.0, 0.0);
-        holdHeading(DRIVE_SPEED, 0.0, 3.0);
+        pushOut();
+        rotateForward();
+        openClaw();
+        closeClaw();
         raiseArm();
-        turn90();
+        openClaw();
+//        turn90();
         lowerArm();
 
 //        driveStraight(DRIVE_SPEED, 5.0, 90.0);  // Drive Forward 17" at -45 degrees (12"x and 12"y)
@@ -301,7 +305,12 @@ public class TechWolves_Autonomous_LeftSide extends LinearOpMode {
         sleep(1000);  // Pause to display last telemetry message.
     }
 
-
+    private void moveForward(double power, long time) {
+        leftFrontDrive.setPower(-power);
+        leftBackDrive.setPower(-power);
+        rightBackDrive.setPower(power);
+        rightFrontDrive.setPower(power);
+    }
 
     private void raiseArm() {
         ExtendingMainMotor.setTargetPosition(armUpPosition);
@@ -321,7 +330,7 @@ public class TechWolves_Autonomous_LeftSide extends LinearOpMode {
     }
 
     private void pushOut(){
-        PushingServo.setPosition(0.9);
+        PushingServo.setPosition(0.5);
     }
 
     private void pushIn(){
