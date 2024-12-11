@@ -121,8 +121,8 @@ public class TechWolves_Autonomous_LeftSide extends LinearOpMode {
     private int LeftBacktarget = 0;
     private int RightBacktarget = 0;
     private ElapsedTime runtime = new ElapsedTime();
-    private int armUpPosition = -1500;
-    private int armDownPosition = 1500;
+    private int armUpPosition = -1200;
+    private int armDownPosition = 0;
 
     // Calculate the COUNTS_PER_INCH for your specific drive train.
     // Go to your motor vendor website to determine your motor's COUNTS_PER_MOTOR_REV
@@ -230,12 +230,13 @@ public class TechWolves_Autonomous_LeftSide extends LinearOpMode {
         //          Add a sleep(2000) after any step to keep the telemetry data visible for review
         driveStraight(DRIVE_SPEED, 5.0, 0.0);
         pushOut();
-        rotateForward();
         openClaw();
+        rotateForward();
         closeClaw();
         raiseArm();
         openClaw();
-//        turn90();
+        holdHeading(DRIVE_SPEED, 0.0, 5);
+        turn90();
         lowerArm();
 
 //        driveStraight(DRIVE_SPEED, 5.0, 90.0);  // Drive Forward 17" at -45 degrees (12"x and 12"y)
