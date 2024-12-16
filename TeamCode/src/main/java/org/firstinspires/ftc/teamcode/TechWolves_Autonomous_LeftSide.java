@@ -210,6 +210,7 @@ public class TechWolves_Autonomous_LeftSide extends LinearOpMode {
 
         ExtendingMainMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
+        mainClaw.setPosition(0.6);
 
         // Wait for the game to start (Display Gyro value while waiting)
         while (opModeInInit()) {
@@ -228,15 +229,13 @@ public class TechWolves_Autonomous_LeftSide extends LinearOpMode {
         // Notes:   Reverse movement is obtained by setting a negative distance (not speed)
         //          holdHeading() is used after turns to let the heading stabilize
         //          Add a sleep(2000) after any step to keep the telemetry data visible for review
-        driveStraight(DRIVE_SPEED, 5.0, 0.0);
         pushOut();
-        openClaw();
-        rotateForward();
-        closeClaw();
         raiseArm();
-        openClaw();
-        holdHeading(DRIVE_SPEED, 0.0, 5);
+        rotateForward();
+        driveStraight(DRIVE_SPEED, 5.0, 0.0);
         turn90();
+        driveStraight(DRIVE_SPEED, 5.0, 90.0);
+        openClaw();
         lowerArm();
 
 //        driveStraight(DRIVE_SPEED, 5.0, 90.0);  // Drive Forward 17" at -45 degrees (12"x and 12"y)
