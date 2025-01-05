@@ -31,6 +31,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.IMU;
@@ -121,8 +122,13 @@ public class TechWolves_Autonomous_LeftSide extends LinearOpMode {
     private int LeftBacktarget = 0;
     private int RightBacktarget = 0;
     private ElapsedTime runtime = new ElapsedTime();
+<<<<<<< Updated upstream:TeamCode/src/main/java/org/firstinspires/ftc/teamcode/TechWolves_Autonomous_LeftSide.java
     private int armUpPosition = -1200;
     private int armDownPosition = 0;
+=======
+    private int armUpPosition = 0;
+    private int armDownPosition = 1000;
+>>>>>>> Stashed changes:TeamCode/src/main/java/org/firstinspires/ftc/teamcode/WolfTech_Autonomous_LeftSide_EXPERIMENTAL.java
 
     // Calculate the COUNTS_PER_INCH for your specific drive train.
     // Go to your motor vendor website to determine your motor's COUNTS_PER_MOTOR_REV
@@ -149,11 +155,19 @@ public class TechWolves_Autonomous_LeftSide extends LinearOpMode {
     static final double     P_TURN_GAIN            = 0.02;     // Larger is more responsive, but also less stable.
     static final double     P_DRIVE_GAIN           = 0.03;  // Larger is more responsive, but also less stable.
 
+<<<<<<< Updated upstream:TeamCode/src/main/java/org/firstinspires/ftc/teamcode/TechWolves_Autonomous_LeftSide.java
 //    int position = ExtendingMainMotor.getCurrentPosition();
 //    double revolutions = position/COUNTS_PER_MOTOR_REV;
 //
 //    double angle = revolutions * 360;
 //    double angleNormalized = angle % 360;
+=======
+    int position = ExtendingMainMotor.getCurrentPosition();
+    double revolutions = position/COUNTS_PER_MOTOR_REV;
+
+    double angle = revolutions * 360;
+    double angleNormalized = angle % 360;
+>>>>>>> Stashed changes:TeamCode/src/main/java/org/firstinspires/ftc/teamcode/WolfTech_Autonomous_LeftSide_EXPERIMENTAL.java
 
 
     @Override
@@ -207,6 +221,11 @@ public class TechWolves_Autonomous_LeftSide extends LinearOpMode {
         leftBackDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBackDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         ExtendingMainMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+<<<<<<< Updated upstream:TeamCode/src/main/java/org/firstinspires/ftc/teamcode/TechWolves_Autonomous_LeftSide.java
+=======
+
+        ExtendingMainMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+>>>>>>> Stashed changes:TeamCode/src/main/java/org/firstinspires/ftc/teamcode/WolfTech_Autonomous_LeftSide_EXPERIMENTAL.java
 
         ExtendingMainMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
@@ -229,6 +248,7 @@ public class TechWolves_Autonomous_LeftSide extends LinearOpMode {
         // Notes:   Reverse movement is obtained by setting a negative distance (not speed)
         //          holdHeading() is used after turns to let the heading stabilize
         //          Add a sleep(2000) after any step to keep the telemetry data visible for review
+<<<<<<< Updated upstream:TeamCode/src/main/java/org/firstinspires/ftc/teamcode/TechWolves_Autonomous_LeftSide.java
         pushOut();
         raiseArm();
         rotateForward();
@@ -236,6 +256,11 @@ public class TechWolves_Autonomous_LeftSide extends LinearOpMode {
         turn90();
         driveStraight(DRIVE_SPEED, 5.0, 90.0);
         openClaw();
+=======
+        driveStraight(DRIVE_SPEED, 5.0, 0.0);
+        raiseArm();
+        turn90();
+>>>>>>> Stashed changes:TeamCode/src/main/java/org/firstinspires/ftc/teamcode/WolfTech_Autonomous_LeftSide_EXPERIMENTAL.java
         lowerArm();
 
 //        driveStraight(DRIVE_SPEED, 5.0, 90.0);  // Drive Forward 17" at -45 degrees (12"x and 12"y)
@@ -305,12 +330,16 @@ public class TechWolves_Autonomous_LeftSide extends LinearOpMode {
         sleep(1000);  // Pause to display last telemetry message.
     }
 
+<<<<<<< Updated upstream:TeamCode/src/main/java/org/firstinspires/ftc/teamcode/TechWolves_Autonomous_LeftSide.java
     private void moveForward(double power, long time) {
         leftFrontDrive.setPower(-power);
         leftBackDrive.setPower(-power);
         rightBackDrive.setPower(power);
         rightFrontDrive.setPower(power);
     }
+=======
+
+>>>>>>> Stashed changes:TeamCode/src/main/java/org/firstinspires/ftc/teamcode/WolfTech_Autonomous_LeftSide_EXPERIMENTAL.java
 
     private void raiseArm() {
         ExtendingMainMotor.setTargetPosition(armUpPosition);
@@ -330,7 +359,11 @@ public class TechWolves_Autonomous_LeftSide extends LinearOpMode {
     }
 
     private void pushOut(){
+<<<<<<< Updated upstream:TeamCode/src/main/java/org/firstinspires/ftc/teamcode/TechWolves_Autonomous_LeftSide.java
         PushingServo.setPosition(0.5);
+=======
+        PushingServo.setPosition(0.9);
+>>>>>>> Stashed changes:TeamCode/src/main/java/org/firstinspires/ftc/teamcode/WolfTech_Autonomous_LeftSide_EXPERIMENTAL.java
     }
 
     private void pushIn(){
