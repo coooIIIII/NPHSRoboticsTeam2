@@ -89,8 +89,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
  *  Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Robot: Auto Drive By Gyro", group="Robot")
-public class TechWolves_Autonomous_LeftSide extends LinearOpMode {
+@Autonomous(name="Robot: TechnoWolvesAutonomous", group="Robot")
+public class TechWolves_Autonomous_RightSide extends LinearOpMode {
 
     public DcMotor leftFrontDrive = null;  // Done
     public DcMotor rightFrontDrive = null; // Done
@@ -210,7 +210,7 @@ public class TechWolves_Autonomous_LeftSide extends LinearOpMode {
 
         ExtendingMainMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        mainClaw.setPosition(0.6);
+
 
         // Wait for the game to start (Display Gyro value while waiting)
         while (opModeInInit()) {
@@ -225,18 +225,22 @@ public class TechWolves_Autonomous_LeftSide extends LinearOpMode {
         rightBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         imu.resetYaw();
 
+
+
         // Step through each leg of the path,
         // Notes:   Reverse movement is obtained by setting a negative distance (not speed)
         //          holdHeading() is used after turns to let the heading stabilize
         //          Add a sleep(2000) after any step to keep the telemetry data visible for review
-        pushOut();
-        raiseArm();
-        rotateForward();
-        driveStraight(DRIVE_SPEED, 5.0, 0.0);
-        turn90();
-        driveStraight(DRIVE_SPEED, 5.0, 90.0);
-        openClaw();
-        lowerArm();
+
+    while (opModeIsActive()) {
+        strafeRight(0.5, 3);
+    }
+
+//        driveStraight(DRIVE_SPEED, 5.0, 0.0);
+//        turn90();
+//        driveStraight(DRIVE_SPEED, 5.0, 90.0);
+//        openClaw();
+//        lowerArm();
 
 //        driveStraight(DRIVE_SPEED, 5.0, 90.0);  // Drive Forward 17" at -45 degrees (12"x and 12"y)
 //        ExtendingMainMotor.setPower(ARM_DOWN_POWER);
@@ -330,7 +334,14 @@ public class TechWolves_Autonomous_LeftSide extends LinearOpMode {
     }
 
     private void pushOut(){
-        PushingServo.setPosition(0.5);
+        PushingServo.setPosition(0.7);
+    }
+
+    private void strafeRight(double power, long time) {
+        leftFrontDrive.setPower(power);
+        rightFrontDrive.setPower(-power);
+        leftBackDrive.setPower(-power);
+        rightBackDrive.setPower(power);
     }
 
     private void pushIn(){

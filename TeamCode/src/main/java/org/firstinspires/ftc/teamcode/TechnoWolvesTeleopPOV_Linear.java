@@ -180,11 +180,11 @@ public class TechnoWolvesTeleopPOV_Linear extends LinearOpMode {
 //            }
 
 
-            if (gamepad1.y) {
+            if (gamepad2.b) {
                 position2 += 0.1;
                 RotatingServo.setPosition(position2);
             }
-            else if (gamepad1.a) {
+            else if (gamepad2.x) {
                 position2 -= 0.1;
                 RotatingServo.setPosition(position2);
             }
