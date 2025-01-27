@@ -138,11 +138,11 @@ public class TechnoWolvesTeleopPOV_Linear extends LinearOpMode {
             right = drive - turn;
 
             // Normalize the values so neither exceed +/- 1.0
-            if (left > 0.5)
-                left = 0.5;
+            if (left > 0.3)
+                left = 0.3;
 
-            if (right > 0.5)
-                right = 0.5;
+            if (right > 0.3)
+                right = 0.3;
 
             if (position > 0.9)
                 position = 0.9;
@@ -161,16 +161,16 @@ public class TechnoWolvesTeleopPOV_Linear extends LinearOpMode {
             rightFrontDrive.setPower(right);
 
             if (gamepad1.dpad_right) {
-                leftFrontDrive.setPower(0.5);
-                rightFrontDrive.setPower(-0.5);
-                leftBackDrive.setPower(-0.5);
-                rightBackDrive.setPower(0.5);
+                leftFrontDrive.setPower(0.3);
+                rightFrontDrive.setPower(-0.3);
+                leftBackDrive.setPower(-0.3);
+                rightBackDrive.setPower(0.3);
             }
             else if (gamepad1.dpad_left) {
-                leftFrontDrive.setPower(-0.5);
-                rightFrontDrive.setPower(0.5);
-                leftBackDrive.setPower(0.5);
-                rightBackDrive.setPower(-0.5);
+                leftFrontDrive.setPower(-0.3);
+                rightFrontDrive.setPower(0.3);
+                leftBackDrive.setPower(0.3);
+                rightBackDrive.setPower(-0.3);
             }
 //            else {
 //                leftFrontDrive.setPower(0);
