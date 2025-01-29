@@ -138,11 +138,11 @@ public class TechnoWolvesTeleopPOV_Linear extends LinearOpMode {
             right = drive - turn;
 
             // Normalize the values so neither exceed +/- 1.0
-            if (left > 0.3)
-                left = 0.3;
+            if (left > 0.5)
+                left = 0.5;
 
-            if (right > 0.3)
-                right = 0.3;
+            if (right > 0.5)
+                right = 0.5;
 
             if (position > 0.9)
                 position = 0.9;
@@ -161,15 +161,15 @@ public class TechnoWolvesTeleopPOV_Linear extends LinearOpMode {
             rightFrontDrive.setPower(right);
 
             if (gamepad1.dpad_right) {
-                leftFrontDrive.setPower(0.3);
-                rightFrontDrive.setPower(-0.3);
-                leftBackDrive.setPower(-0.3);
-                rightBackDrive.setPower(0.3);
+                leftFrontDrive.setPower(0.5);
+                rightFrontDrive.setPower(-0.5);
+                leftBackDrive.setPower(-0.5);
+                rightBackDrive.setPower(0.5);
             } else if (gamepad1.dpad_left) {
-                leftFrontDrive.setPower(-0.3);
-                rightFrontDrive.setPower(0.3);
-                leftBackDrive.setPower(0.3);
-                rightBackDrive.setPower(-0.3);
+                leftFrontDrive.setPower(-0.5);
+                rightFrontDrive.setPower(0.5);
+                leftBackDrive.setPower(0.5);
+                rightBackDrive.setPower(-0.5);
             }
 //            else {
 //                leftFrontDrive.setPower(0);
@@ -179,56 +179,53 @@ public class TechnoWolvesTeleopPOV_Linear extends LinearOpMode {
 //            }
 
 
-            if (gamepad2.b) {
+
+
+            if (gamepad2.x) {
                 position2 += 0.1;
                 RotatingServo.setPosition(position2);
-            } else if (gamepad2.x) {
+            } else if (gamepad2.b) {
 
-                if (gamepad2.x) {
-                    position2 += 0.1;
-                    RotatingServo.setPosition(position2);
-                } else if (gamepad2.b) {
-
-                    position2 -= 0.1;
-                    RotatingServo.setPosition(position2);
-                }
+                position2 -= 0.1;
+                RotatingServo.setPosition(position2);
+            }
 
 
-                // Move both servos to new position.  Assume servos are mirror image of each other.
-                clawOffset = Range.clip(clawOffset, -0.5, 0.5);
-                mainClaw.setPosition(MID_SERVO + clawOffset);
+            // Move both servos to new position.  Assume servos are mirror image of each other.
+            clawOffset = Range.clip(clawOffset, -0.5, 0.5);
+            mainClaw.setPosition(MID_SERVO + clawOffset);
 
-                if (gamepad2.right_bumper)
-                    clawOffset += CLAW_SPEED;
-                else if (gamepad2.left_bumper)
-                    clawOffset -= CLAW_SPEED;
+            if (gamepad2.right_bumper)
+                clawOffset += CLAW_SPEED;
+            else if (gamepad2.left_bumper)
+                clawOffset -= CLAW_SPEED;
 
 
-                // Use gamepad buttons to move arm up (Y) and down (A)
-                if (gamepad2.dpad_up)
-                    ExtendingMainMotor.setPower(ARM_UP_POWER);
-                else if (gamepad2.dpad_down)
-                    ExtendingMainMotor.setPower(ARM_DOWN_POWER);
-                else
-                    ExtendingMainMotor.setPower(0.0);
+            // Use gamepad buttons to move arm up (Y) and down (A)
+            if (gamepad2.dpad_up)
+                ExtendingMainMotor.setPower(ARM_UP_POWER);
+            else if (gamepad2.dpad_down)
+                ExtendingMainMotor.setPower(ARM_DOWN_POWER);
+            else
+                ExtendingMainMotor.setPower(0.0);
 
-                if (gamepad1.dpad_up) {
-                    RaisingMotor.setPower(RAISE);
+            if (gamepad1.dpad_up) {
+                RaisingMotor.setPower(RAISE);
 //                CounterWeightMotor.setPower(RAISE);
-                } else if (gamepad1.dpad_down) {
-                    RaisingMotor.setPower(LOWER);
+            } else if (gamepad1.dpad_down) {
+                RaisingMotor.setPower(LOWER);
 //                CounterWeightMotor.setPower(LOWER);
-                } else {
-                    RaisingMotor.setPower(0.0);
-                }
+            } else {
+                RaisingMotor.setPower(0.0);
+            }
 
-                if (gamepad2.y) {
-                    position += 0.1;
-                    PushingServo.setPosition(position);
-                } else if (gamepad2.a) {
-                    position -= 0.1;
-                    PushingServo.setPosition(position);
-                }
+            if (gamepad2.y) {
+                position += 0.1;
+                PushingServo.setPosition(position);
+            } else if (gamepad2.a) {
+                position -= 0.1;
+                PushingServo.setPosition(position);
+            }
 
 
                 // Send telemetry message to signify robot running;
@@ -248,4 +245,3 @@ public class TechnoWolvesTeleopPOV_Linear extends LinearOpMode {
             }
         }
     }
-}
