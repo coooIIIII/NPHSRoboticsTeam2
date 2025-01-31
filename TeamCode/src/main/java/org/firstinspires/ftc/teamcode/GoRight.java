@@ -12,7 +12,7 @@ public class GoRight extends LinearOpMode{
     public DcMotor  rightBackDrive = null;
 
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void runOpMode() {
         leftFrontDrive = hardwareMap.get(DcMotor.class, "lfd");
         rightFrontDrive = hardwareMap.get(DcMotor.class, "rfd");
         leftBackDrive = hardwareMap.get(DcMotor.class, "lbd");
@@ -30,7 +30,6 @@ public class GoRight extends LinearOpMode{
         rightFrontDrive.setPower(-power);
         leftBackDrive.setPower(-power);
         rightBackDrive.setPower(power);
-        sleep(time);
 
     }
 }

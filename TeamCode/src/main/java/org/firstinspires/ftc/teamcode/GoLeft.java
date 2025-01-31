@@ -6,13 +6,13 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 @Autonomous (name="GoLeft")
 public class GoLeft extends LinearOpMode{
-    public DcMotor leftFrontDrive = null;  // Done
+    public DcMotor  leftFrontDrive = null;  // Done
     public DcMotor  rightFrontDrive = null; // Done
     public DcMotor  leftBackDrive = null; // Done
     public DcMotor  rightBackDrive = null;
 
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void runOpMode() {
         leftFrontDrive = hardwareMap.get(DcMotor.class, "lfd");
         rightFrontDrive = hardwareMap.get(DcMotor.class, "rfd");
         leftBackDrive = hardwareMap.get(DcMotor.class, "lbd");
@@ -30,7 +30,6 @@ public class GoLeft extends LinearOpMode{
         rightFrontDrive.setPower(power);
         leftBackDrive.setPower(power);
         rightBackDrive.setPower(-power);
-        sleep(time);
 
     }
 }
