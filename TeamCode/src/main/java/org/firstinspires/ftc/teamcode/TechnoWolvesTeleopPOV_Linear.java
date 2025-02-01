@@ -49,7 +49,7 @@ import com.qualcomm.robotcore.util.Range;
  */
 
 @TeleOp(name="Robot: Teleop POV", group="Robot")
-public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
+public class TechnoWolvesTeleopPOV_Linear extends LinearOpMode {
 
     /* Declare OpMode members. */
     public DcMotor  leftFrontDrive = null;  // Done
@@ -131,10 +131,10 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
             // In this mode the Left stick moves the robot fwd and back, the Right stick turns left and right.
             // This way it's also easy to just drive straight, or just turn.
             drive = -gamepad1.left_stick_y;
-            turn  =  gamepad1.right_stick_x;
+            turn = gamepad1.right_stick_x;
 
             // Combine drive and turn for blended motion.
-            left  = drive + turn;
+            left = drive + turn;
             right = drive - turn;
 
             // Normalize the values so neither exceed +/- 1.0
@@ -165,6 +165,7 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
                 rightFrontDrive.setPower(-0.5);
                 leftBackDrive.setPower(-0.5);
                 rightBackDrive.setPower(0.5);
+
             }
             else if (gamepad1.dpad_left) {
                 leftFrontDrive.setPower(-0.5);
@@ -172,6 +173,9 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
                 leftBackDrive.setPower(0.5);
                 rightBackDrive.setPower(-0.5);
             }
+
+
+
 //            else {
 //                leftFrontDrive.setPower(0);
 //                rightFrontDrive.setPower(0);
@@ -180,16 +184,37 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
 //            }
 
 
+
             if (gamepad1.y) {
                 position2 += 0.1;
                 RotatingServo.setPosition(position2);
             }
             else if (gamepad1.a) {
+
+
+
+            if (gamepad2.x) {
+                position2 += 0.1;
+                RotatingServo.setPosition(position2);
+            } else if (gamepad2.b) {
+
+
                 position2 -= 0.1;
                 RotatingServo.setPosition(position2);
             }
 
 
+
+
+
+            // Move both servos to new position.  Assume servos are mirror image of each other.
+            clawOffset = Range.clip(clawOffset, -0.5, 0.5);
+            mainClaw.setPosition(MID_SERVO + clawOffset);
+
+            if (gamepad2.right_bumper)
+                clawOffset += CLAW_SPEED;
+            else if (gamepad2.left_bumper)
+                clawOffset -= CLAW_SPEED;
 
 
             // Move both servos to new position.  Assume servos are mirror image of each other.
@@ -214,23 +239,23 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
             if (gamepad1.dpad_up) {
                 RaisingMotor.setPower(RAISE);
 //                CounterWeightMotor.setPower(RAISE);
+
             }
             else if (gamepad1.dpad_down) {
                 RaisingMotor.setPower(LOWER);
 //                CounterWeightMotor.setPower(LOWER);
             }
-            else {
-                RaisingMotor.setPower(0.0);
-            }
 
             if (gamepad2.y) {
                 position += 0.1;
                 PushingServo.setPosition(position);
+
             }
-            else if (gamepad2.a) {
+            } else if (gamepad2.a) {
                 position -= 0.1;
                 PushingServo.setPosition(position);
             }
+
 
 
 
@@ -245,11 +270,21 @@ public class WolfTech_TeleopPOV_Linear extends LinearOpMode {
             telemetry.addData("Position2", position2);
 
 
+                // Send telemetry message to signify robot running;
+                telemetry.addData("Left Front", leftFrontDrive.getPower());
+                telemetry.addData("Left Back", leftBackDrive.getPower());
+                telemetry.addData("Right Front", rightFrontDrive.getPower());
+                telemetry.addData("Right Back", rightBackDrive.getPower());
+                telemetry.addData("Claw", mainClaw.getPosition());
+                telemetry.addData("Position", position);
+                telemetry.addData("Position2", position2);
 
-            telemetry.update();
 
-            // Pace this loop so jaw action is reasonable speed.
-            sleep(50);
+                telemetry.update();
+
+                // Pace this loop so jaw action is reasonable speed.
+                sleep(50);
+            }
         }
     }
-}
+
