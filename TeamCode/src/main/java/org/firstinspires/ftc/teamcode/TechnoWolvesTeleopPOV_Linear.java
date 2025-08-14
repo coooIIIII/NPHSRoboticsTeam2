@@ -56,27 +56,9 @@ public class TechnoWolvesTeleopPOV_Linear extends LinearOpMode {
     public DcMotor  rightFrontDrive = null; // Done
     public DcMotor  leftBackDrive = null; // Done
     public DcMotor  rightBackDrive = null; // Done
-    public DcMotor RaisingMotor = null;
-    public DcMotor ExtendingMainMotor = null; // Done
-    public Servo RotatingServo = null; // Done
-    public Servo    mainClaw = null; // Done
-    public Servo PushingServo = null;
 
 
 
-    double clawOffset = 0;
-    double position = 0;
-    double position2 = 0;
-
-
-
-    public static final double MID_SERVO   =  0.5 ;
-
-    public static final double CLAW_SPEED  = 0.02 ;                 // sets rate to move servo
-    public static final double ARM_DOWN_POWER    =  2 ;
-    public static final double ARM_UP_POWER  = -2 ;
-    public static final double RAISE    =  -2 ;
-    public static final double LOWER = 2 ;
 
     @Override
     public void runOpMode() {
@@ -91,8 +73,7 @@ public class TechnoWolvesTeleopPOV_Linear extends LinearOpMode {
         rightFrontDrive = hardwareMap.get(DcMotor.class, "rfd");
         leftBackDrive = hardwareMap.get(DcMotor.class, "lbd");
         rightBackDrive = hardwareMap.get(DcMotor.class, "rbd");
-        ExtendingMainMotor = hardwareMap.get(DcMotor.class, "emm");
-        RaisingMotor = hardwareMap.get(DcMotor.class, "rmm");
+
 
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
@@ -102,20 +83,6 @@ public class TechnoWolvesTeleopPOV_Linear extends LinearOpMode {
         leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
         rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
         rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
-        ExtendingMainMotor.setDirection(DcMotor.Direction.FORWARD);
-
-
-        RaisingMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-
-        // Define and initialize ALL installed servos.
-        mainClaw = hardwareMap.get(Servo.class, "mc");
-        mainClaw.setPosition(0);
-
-        PushingServo = hardwareMap.get(Servo.class, "ps");
-        PushingServo.setPosition(0);
-
-        RotatingServo = hardwareMap.get(Servo.class, "rs");
-        RotatingServo.setPosition(0);
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData(">", "Robot Ready.  Press START.");    //
@@ -144,15 +111,7 @@ public class TechnoWolvesTeleopPOV_Linear extends LinearOpMode {
             if (right > 0.5)
                 right = 0.5;
 
-            if (position > 0.9)
-                position = 0.9;
-            if (position < 0)
-                position = 0;
 
-            if (position2 > 0.7)
-                position2 = 0.7;
-            if (position2 < 0)
-                position2 = 0;
 
             // Output the safe vales to the motor drives.
             leftFrontDrive.setPower(left);
@@ -181,50 +140,10 @@ public class TechnoWolvesTeleopPOV_Linear extends LinearOpMode {
 
 
 
-            if (gamepad2.x) {
-                position2 += 0.1;
-                RotatingServo.setPosition(position2);
-            } else if (gamepad2.b) {
-
-                position2 -= 0.1;
-                RotatingServo.setPosition(position2);
-            }
 
 
-            // Move both servos to new position.  Assume servos are mirror image of each other.
-            clawOffset = Range.clip(clawOffset, -0.5, 0.5);
-            mainClaw.setPosition(MID_SERVO + clawOffset);
-
-            if (gamepad2.right_bumper)
-                clawOffset += CLAW_SPEED;
-            else if (gamepad2.left_bumper)
-                clawOffset -= CLAW_SPEED;
 
 
-            // Use gamepad buttons to move arm up (Y) and down (A)
-            if (gamepad2.dpad_up)
-                ExtendingMainMotor.setPower(ARM_UP_POWER);
-            else if (gamepad2.dpad_down)
-                ExtendingMainMotor.setPower(ARM_DOWN_POWER);
-            else
-                ExtendingMainMotor.setPower(0.0);
-
-            if (gamepad1.dpad_up) {
-                RaisingMotor.setPower(RAISE);
-//                CounterWeightMotor.setPower(RAISE);
-            } else if (gamepad1.dpad_down) {
-                RaisingMotor.setPower(LOWER);
-//                CounterWeightMotor.setPower(LOWER);
-            } else {
-                RaisingMotor.setPower(0.0);
-            }
-
-            if (gamepad2.y) {
-                position += 0.1;
-                PushingServo.setPosition(position);
-            } else if (gamepad2.a) {
-                position -= 0.1;
-                PushingServo.setPosition(position);
             }
 
 
@@ -233,9 +152,7 @@ public class TechnoWolvesTeleopPOV_Linear extends LinearOpMode {
                 telemetry.addData("Left Back", leftBackDrive.getPower());
                 telemetry.addData("Right Front", rightFrontDrive.getPower());
                 telemetry.addData("Right Back", rightBackDrive.getPower());
-                telemetry.addData("Claw", mainClaw.getPosition());
-                telemetry.addData("Position", position);
-                telemetry.addData("Position2", position2);
+
 
 
                 telemetry.update();
@@ -244,4 +161,3 @@ public class TechnoWolvesTeleopPOV_Linear extends LinearOpMode {
                 sleep(50);
             }
         }
-    }
