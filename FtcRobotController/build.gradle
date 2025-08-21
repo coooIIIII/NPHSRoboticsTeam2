@@ -2,6 +2,12 @@ import java.text.SimpleDateFormat
 
 //
 // build.gradle in FtcRobotController
+task wrapper(type: Wrapper){
+    gradleVersion = '7.2'
+}
+task prepareKotlinBuildScriptModel {
+
+}
 //
 apply plugin: 'com.android.library'
 
