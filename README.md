@@ -577,7 +577,7 @@ This is a bug fix only release to address the following four issues.
 ### Enhancements and New Features
 * Adds support for external libraries to OnBotJava and Blocks.
     * Upload .jar and .aar files in OnBotJava.
-      * Known limitation - RobotController device must be running Android 7.0 or greater.
+      * Known limitation - org.firstinspires.ftc.teamcode.RobotController device must be running Android 7.0 or greater.
       * Known limitation - .aar files with assets are not supported.
     * External libraries can provide support for hardware devices by using the annotation in the
       com.qualcomm.robotcore.hardware.configuration.annotations package.
@@ -977,7 +977,7 @@ Version 5.5 requires Android Studio 4.0 or later.
     * To show the stream on the DS, initialize **but do not run** a stream-enabled opmode, select the Camera Stream option in the DS menu, and tap the image to refresh. This feature is automatically enabled when using Vuforia or TFOD—no additional RC configuration is required for typical use cases. To hide the stream, select the same menu item again.
     * Note that gamepads are disabled and the selected opmode cannot be started while the stream is open as a safety precaution.
     * To use custom streams, consult the API docs for `CameraStreamServer#setSource` and `CameraStreamSource`.
-* Adds many Star Wars sounds to RobotController resources.
+* Adds many Star Wars sounds to org.firstinspires.ftc.teamcode.RobotController resources.
 * Added Skystone Sounds Chooser Sample Program.
 * Switches out startup, connect chimes, and error/warning sounds for Star Wars sounds
 * Updates OnBot Java to use a WebSocket for communication with the robot
