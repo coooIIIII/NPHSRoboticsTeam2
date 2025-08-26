@@ -30,6 +30,7 @@
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
@@ -62,16 +63,22 @@ public class RobotController extends LinearOpMode {
         double right;
         double drive;
         double turn;
-        double max;
 
         // Define and Initialize Motors
-        leftFrontdrive = hardwareMap.get(DcMotor.class, "left_drive");
+        leftFrontdrive = hardwareMap.get(DcMotor.class, "lfd");
+        rightFrontdrive = hardwareMap.get(DcMotor.class, "rfd");
+        leftBackdrive = hardwareMap.get(DcMotor.class, "lbd");
+        rightBackdrive = hardwareMap.get(DcMotor.class, "rbd");
 
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
         // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
         leftFrontdrive.setDirection(DcMotor.Direction.REVERSE);
+        rightFrontdrive.setDirection(DcMotor.Direction.FORWARD);
+        leftBackdrive.setDirection(DcMotor.Direction.REVERSE);
+        rightBackdrive.setDirection(DcMotorSimple.Direction.FORWARD);
+
 
 
         // If there are encoders connected, switch to RUN_USING_ENCODER mode for greater accuracy
