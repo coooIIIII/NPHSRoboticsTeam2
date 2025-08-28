@@ -113,8 +113,20 @@ public class RobotController extends LinearOpMode {
             rightBackdrive.setPower(right);
             rightFrontdrive.setPower(right);
 
-            // Use gamepad left & right Bumpers to open and close the claw
+            if (gamepad1.dpad_left) {
+                leftFrontdrive.setPower(1);
+                rightFrontdrive.setPower(-1);
+                leftBackdrive.setPower(-1);
+                rightBackdrive.setPower(1);
+            }
 
+            if (gamepad1.dpad_right) {
+                leftFrontdrive.setPower(-1);
+                rightFrontdrive.setPower(1);
+                leftBackdrive.setPower(1);
+                rightBackdrive.setPower(-1);
+            }
+                
 
             // Send telemetry message to signify robot running;
             telemetry.addData("left",  "%.2f", left);
