@@ -72,6 +72,20 @@ public class RobotController1 extends LinearOpMode {
             rightFrontdrive.setPower(right);
             rightBackdrive.setPower(right);
 
+            if (gamepad1.dpad_left) {
+                leftFrontdrive.setPower(1);
+                rightFrontdrive.setPower(-1);
+                leftBackdrive.setPower(-1);
+                rightBackdrive.setPower(1);
+            }
+
+            if (gamepad1.dpad_right) {
+                leftFrontdrive.setPower(-1);
+                rightFrontdrive.setPower(1);
+                leftBackdrive.setPower(1);
+                rightBackdrive.setPower(-1);
+            }
+
 // Telemetry for debugging
             telemetry.addData("Left Power", "%.2f", left);
             telemetry.addData("Right Power", "%.2f", right);
