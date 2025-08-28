@@ -6,7 +6,7 @@ This repository contains the public FTC SDK for the INTO THE DEEP (2024-2025) co
 This GitHub repository contains the source code that is used to build an Android app to control a *FIRST* Tech Challenge competition robot.  To use this SDK, download/clone the entire project to your local computer.
 
 ## Requirements
-To use this Android Studio project, you will need Android Studio 2021.2 (codename Chipmunk) or later.
+To use this Android Studio project, you will need Android Studio Ladybug (2024.2) or later.
 
 To program your robot in Blocks or OnBot Java, you do not need Android Studio.
 
@@ -58,6 +58,85 @@ Samples Folder: &nbsp;&nbsp; [/FtcRobotController/src/main/java/org/firstinspire
 The readme.md file located in the [/TeamCode/src/main/java/org/firstinspires/ftc/teamcode](TeamCode/src/main/java/org/firstinspires/ftc/teamcode) folder contains an explanation of the sample naming convention, and instructions on how to copy them to your own project space.
 
 # Release Information
+
+## Version 10.3 (20250625-090416)
+
+### Breaking Changes
+* The behavior of setGlobalErrorMsg() is changed.  Note that this is an SDK internal method that is not 
+  meant to be used by team software or third party libraries.  Teams or libraries using this method should
+  find another means to communicate failure.  The design intent of setGlobalErrorMsg() is to report an 
+  error and force the user to restart the robot, which in certain circumstances when used inappropriately
+  could cause a robot to continue running while Driver Station controls are disabled.  To prevent this,
+  processing of a call to setGlobalErrorMsg() is deferred until the robot is in a known safe state.  This may
+  mean that a call to setGlobalErrorMsg() that does not also result in stopping a running OpMode will appear
+  as though nothing happened until the robot is stopped, at which point, if clearGlobalErrorMsg() has not 
+  been called the message will appear on the Driver Station and a restart will be required.
+  Addresses issue [1381](https://github.com/FIRST-Tech-Challenge/FtcRobotController/issues/1381)
+* Fixes getLatestResult in Limelight3A so if the Limelight hasn't provided data yet, it still returns an LLResult but valid will be false
+  * If you previously used to check and see if this was `null` to see if the Limelight had been contacted, you now need to use `isValid()` on the result.  That is because now it always returns an LLResult even before it talks to the Limelight, but if it doesn't have valid data, the `isValid()` will be `false`.
+* Changed all omni samples to use front_left_drive, front_right_drive, back_left_drive, back_right_drive
+  * This is only breaking for you if you copy one of the changed samples to your own project and expect to use the same robot configuration as before.
+
+### Known Issues
+* The redesigned OnBotJava new file workflow allows the user to use a lowercase letter as the first character of a filename.
+  This is a regression from 10.2 which required the first character to be uppercase.  Software will build, but if the user tries
+  to rename the file, the rename will fail.
+
+### Enhancements
+* Improved the OBJ new file creation flow workflow. The new flow allows you to easily use samples, craft new custom OpModes and make new Java classes.
+* Added support for gamepad edge detection.
+  * A new sample program `ConceptGamepadEdgeDetection` demonstrates its use.
+* Adds a blackboard member to the Opmode that maintains state between opmodes (but not between robot resets).  See the ConceptBlackboard sample for how to use it.
+* Updated PredominantColorProcessor to also return the predominant color in RGB, HSV and YCrCb color spaces.  Updated ConceptVisionColorSensor sample OpMode to display the getAnalysis() result in all three color spaces.
+* Adds support for the GoBilda Pinpoint 
+  * Also adds `SensorGoBildaPinpoint` sample to show how to use it
+* Added `getArcLength()` and `getCircularity()` to ColorBlobLocatorProcessor.Blob.  Added BY_ARC_LENGTH and BY_CIRCULARITY as additional BlobCriteria.
+* Added `filterByCriteria()` and `sortByCriteria()` to ColorBlobLocatorProcessor.Util.
+  * The filter and sort methods for specific criteria have been deprecated.
+  * The updated sample program `ConceptVisionColorLocator` provides more details on the new syntax.
+* Add Help menu item and Help page that is available when connected to the robot controller via Program and Manage. The Help page has links to team resources such as [FTC Documentation](https://ftc-docs.firstinspires.org/), [FTC Discussion Forums](https://ftc-community.firstinspires.org), [Java FTC SDK API Documentation](https://javadoc.io/doc/org.firstinspires.ftc), and [FTC Game Information](https://ftc.game/).
+* Self inspection changes:
+  * List both the Driver Station Name and Robot Controller Name when inspecting the Driver Station.
+  * Report if the team number portion of the device names do not match.
+  * -rc is no longer valid as part of a Robot Controller name, must be -RC.
+  * Use Robot Controller Name or Driver Station Name labels on the inspection screens instead of WIFI Access Point or WIFI Direct Name.
+
+### Bug Fixes
+* Fixes issue [1478](https://github.com/FIRST-Tech-Challenge/FtcRobotController/issues/1478) in AnnotatedHooksClassFilter that ignored exceptions if they occur in one of the SDK app hooks.
+* Fix initialize in distance sensor (Rev 2m) to prevent bad data in first call to getDistance.
+* Fixes issue [1470](https://github.com/FIRST-Tech-Challenge/FtcRobotController/issues/1470) Scaling a servo range is now irrespective of reverse() being called.  For example, if you set the scale range to [0.0, 0.5] and the servo is reversed, it will be from 0.5 to 0.0, NOT 1.0 to 0.5.
+* Fixes issue [1232](https://github.com/FIRST-Tech-Challenge/FtcRobotController/issues/1232), a rare race condition where using the log rapidly along with other telemetry could cause a crash.
+
+## Version 10.2 (20250121-174034)
+
+### Enhancements
+* Add ability to upload the pipeline for Limelight3A which allows teams to version control their limelight pipelines.
+
+
+### Bug Fixes
+
+* Fix an internal bug where if the RUN_TO_POSITION run mode was specified before a target position, recovery would require a power cycle. A side effect of this fix is that a stack trace identifying the location of the error is always produced in the log. Fixes issue [1345](https://github.com/FIRST-Tech-Challenge/FtcRobotController/issues/1345).
+* Throws a helpful exception if region of interest is set to null when building a PredominantColorProcessor. Also sets the default RoI to the full frame. Addresses issue [1076](FIRST-Tech-Challenge/FtcRobotController#1076)
+* Throws a helpful exception if user tries to construct an ImageRegion with malformed boundaries.  Addresses issue [1078](FIRST-Tech-Challenge/FtcRobotController#1078)
+
+## Version 10.1.1 (20241102-092223)
+
+### Breaking Changes
+
+* Support for Android Studio Ladybug.  Requires Android Studio Ladybug.  
+
+### Known Issues
+
+* Android Studio Ladybug's bundled JDK is version 21.  JDK 21 has deprecated support for Java 1.8, and Ladybug will warn on this deprecation.
+  OnBotJava only supports Java 1.8, therefore, in order to ensure that software developed using Android Studio will 
+  run within the OnBotJava environment, the targetCompatibility and sourceCompatibility versions for the SDK have been left at VERSION_1_8.
+  FIRST has decided that until it can devote the resources to migrating OnBotJava to a newer version of Java, the deprecation is the 
+  lesser of two non-optimal situations.
+
+### Enhancements
+
+* Added `toString()` method to Pose2D
+* Added `toString()` method to SparkFunOTOS.Pose2D
 
 ## Version 10.1 (20240919-122750)
 
@@ -498,7 +577,7 @@ This is a bug fix only release to address the following four issues.
 ### Enhancements and New Features
 * Adds support for external libraries to OnBotJava and Blocks.
     * Upload .jar and .aar files in OnBotJava.
-      * Known limitation - RobotController device must be running Android 7.0 or greater.
+      * Known limitation - org.firstinspires.ftc.teamcode.RobotController device must be running Android 7.0 or greater.
       * Known limitation - .aar files with assets are not supported.
     * External libraries can provide support for hardware devices by using the annotation in the
       com.qualcomm.robotcore.hardware.configuration.annotations package.
@@ -898,7 +977,7 @@ Version 5.5 requires Android Studio 4.0 or later.
     * To show the stream on the DS, initialize **but do not run** a stream-enabled opmode, select the Camera Stream option in the DS menu, and tap the image to refresh. This feature is automatically enabled when using Vuforia or TFOD—no additional RC configuration is required for typical use cases. To hide the stream, select the same menu item again.
     * Note that gamepads are disabled and the selected opmode cannot be started while the stream is open as a safety precaution.
     * To use custom streams, consult the API docs for `CameraStreamServer#setSource` and `CameraStreamSource`.
-* Adds many Star Wars sounds to RobotController resources.
+* Adds many Star Wars sounds to org.firstinspires.ftc.teamcode.RobotController resources.
 * Added Skystone Sounds Chooser Sample Program.
 * Switches out startup, connect chimes, and error/warning sounds for Star Wars sounds
 * Updates OnBot Java to use a WebSocket for communication with the robot
@@ -1046,7 +1125,7 @@ Changes include:
     - Added an external sample OpMode that demonstrates localization using 2018-2019 (Rover Ruckus presented by QualComm) Vuforia targets.
     - Added an external sample OpMode that demonstrates how to use the REV Robotics 2m Laser Distance Sensor.
     - Added an external sample OpMode that demonstrates how to use the REV Robotics Blinkin LED Controller.
-    - Re-categorized external Java sample OpModes to "TeleOp" instead of "Autonomous".
+    - Re-categorized external Java sample OpModes to "TeleOp" instead of "org.firstinspires.ftc.teamcode.Autonomous".
 
 Known issues:
  * Initial support for UVC compatible cameras
@@ -1072,7 +1151,7 @@ Changes include:
  * Blocks Changes
      - Uses updated Google Blockly software to allow users to edit their OpModes on Apple iOS devices (including iPad and iPhone).
      - Improvement in Blocks tool to handle corrupt OpMode files.
-     - Autonomous OpModes should no longer get switched back to tele-op after re-opening them to be edited.
+     - org.firstinspires.ftc.teamcode.Autonomous OpModes should no longer get switched back to tele-op after re-opening them to be edited.
      - The system can now detect type mismatches during runtime and alert the user with a message on the Driver Station.
  * Updated javadoc documentation for setPower() method to reflect correct range of values (-1 to +1).
  * Modified VuforiaLocalizerImpl to allow for user rendering of frames
@@ -1208,7 +1287,7 @@ Please note, however, that version 3.00 is considered "alpha" code.  This code i
 
 Changes include:
  * Major rework of sensor-related infrastructure.  Includes rewriting sensor classes to implement synchronous I2C communication.
- * Fix to reset Autonomous timer back to 30 seconds.
+ * Fix to reset org.firstinspires.ftc.teamcode.Autonomous timer back to 30 seconds.
  * Implementation of specific motor profiles for approved 12V motors (includes Tetrix, AndyMark, Matrix and REV models).
  * Modest improvements to enhance Wi-Fi P2P pairing.
  * Fixes telemetry log addition race.
@@ -1317,7 +1396,7 @@ Changes include:
      - Added logging when a blocks file is read/written.
      - Fixed bug to properly render blocks even if missing devices from configuration file.
      - Added support for additional characters (not just alphanumeric) for the block file names (for download and upload).
-     - Added support for OpMode flavor (“Autonomous” or “TeleOp”) and group.
+     - Added support for OpMode flavor (“org.firstinspires.ftc.teamcode.Autonomous” or “TeleOp”) and group.
   * Changes to Samples to prevent tutorial issues.
   * Incorporated suggested changes from public pull 216 (“Replace .. paths”).
   * Remove Servo Glitches when robot stopped.
