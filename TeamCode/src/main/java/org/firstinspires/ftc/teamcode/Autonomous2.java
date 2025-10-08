@@ -14,6 +14,8 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 import android.util.Size;
 import java.util.List;
 
+
+
 @Autonomous(name="Autonomous2", group="Robot")
 public class Autonomous2 extends LinearOpMode {
 
